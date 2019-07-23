@@ -43,7 +43,7 @@ def normalizado(c):
 def read(file):
     data = pd.read_csv(file, sep=',', decimal=",")
     #print (data)
-    print ("Numero inicial de muestras: " + str(len(data)))
+    # print ("Numero inicial de muestras: " + str(len(data)))
     ### a cada variable se la convierte a al rango utilizado
 
     data.SM_SMAP = data.SM_SMAP *100
@@ -72,17 +72,17 @@ def read(file):
     sns.distplot(data.Et)
     # plt.show()
     
-    print ("Numero de muestras: " + str(len(data)))
+    # print ("Numero de muestras: " + str(len(data)))
 
 
     ## se filtra el rango de valores de backscattering
     perc5Back = math.ceil(np.percentile(data.Sigma0,1))
-    print("percentile back 5: " + str(perc5Back))
+    # print("percentile back 5: " + str(perc5Back))
     perc90Back = math.ceil(np.percentile(data.Sigma0, 99))
-    print("percentile back 95: " + str(perc90Back))
+    # print("percentile back 95: " + str(perc90Back))
     dataNew = data[(data.Sigma0 > -18) & (data.Sigma0 < -4)]
     data = dataNew
-    print("Numero de muestras: " + str(len(data)))    
+    # print("Numero de muestras: " + str(len(data)))    
 
     
     
@@ -125,8 +125,8 @@ def read(file):
     #dataNew = data[ (data.NDVI_30m_B > 0.1) & (data.NDVI_30m_B < 0.49)]
     dataNew = data[ (data.NDVI > 0.1) & (data.NDVI < 0.8)]
     data = dataNew
-    print ("Filtro por NDVI")
-    print ("Numero de muestras: " + str(len(data)))
+    # print ("Filtro por NDVI")
+    # print ("Numero de muestras: " + str(len(data)))
 
     del data['NDVI']
     del data['Date']
@@ -149,7 +149,7 @@ def read(file):
 
 #    del data['T_s_modis']
     del data['T_s']
-    print('------------------------------------------------------------------')
-    print(data.describe())
-    print('------------------------------------------------------------------')
+    # print('------------------------------------------------------------------')
+    # print(data.describe())
+    # print('------------------------------------------------------------------')
     return data
