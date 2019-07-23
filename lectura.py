@@ -51,13 +51,13 @@ def read(file):
     ### Temperatura de SMAP
     data.T_s = data.T_s -273.15
     ### Temperatura de MODIS
-    fig, ax = plt.subplots()
-    sns.distplot(data.T_s)
+    # fig, ax = plt.subplots()
+    # sns.distplot(data.T_s)
     dataNew = data[(data.T_s_modis > 250)]
     data = dataNew
     data.T_s_modis = data.T_s_modis -273.15
-    fig, ax = plt.subplots()
-    sns.distplot(data.T_s_modis)    
+    # fig, ax = plt.subplots()
+    # sns.distplot(data.T_s_modis)    
 
     ### Evapotranspiración de MODIS
 #    fig, ax = plt.subplots()
@@ -68,8 +68,8 @@ def read(file):
 #    sns.distplot(data.Et)
     
     data.Et = ((data.Et*0.1)/8)/0.035
-    fig, ax = plt.subplots()
-    sns.distplot(data.Et)
+    # fig, ax = plt.subplots()
+    # sns.distplot(data.Et)
     # plt.show()
     
     # print ("Numero de muestras: " + str(len(data)))
