@@ -130,7 +130,6 @@ def read(file):
 
     del data['NDVI']
     del data['Date']
-#    del data['T_s_modis']
     
     # print("-----------------------------------------------------------------------")
     # print(data.describe())
@@ -147,8 +146,9 @@ def read(file):
     data.Et = normalizado(data.Et)
     data.T_s_modis = normalizado(data.T_s_modis)
 
-#    del data['T_s_modis']
-    del data['T_s']
+    del data['T_s_modis']
+    # del data['T_s']
+
     # print('------------------------------------------------------------------')
     # print(data.describe())
     # print('------------------------------------------------------------------')
