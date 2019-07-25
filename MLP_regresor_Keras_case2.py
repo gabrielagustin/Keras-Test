@@ -22,10 +22,11 @@ import numpy
 
 def create_simple_nn():  
     # create model, as a regressor
+    # Here you should use something like Scikit-learn to find the best architecture
     model = Sequential()
     model.add(Dense(8, input_dim=4, kernel_initializer='uniform', activation='relu'))
     model.add(Dense(8, kernel_initializer='uniform', activation='relu'))
-    model.add(Dense(1, kernel_initializer='uniform', activation='sigmoid'))
+    model.add(Dense(1, kernel_initializer='uniform'))
     return model
 
 
@@ -57,19 +58,23 @@ del dataTest["SM_SMAP"]
 X_test = dataTest
 
 
+# fix random seed for reproducibility
+seed = 7
+np.random.seed(seed)
+
 snn_model = create_simple_nn()  
-snn_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])  
+snn_model.compile(optimizer='adam', loss='mean_squared_error', metrics=['mae','accuracy'])  
 
 snn = snn_model.fit(x=X_train, y=y_train, batch_size=32, epochs=10, verbose=1, validation_data=(X_test, y_test), shuffle=True)  
 
 plt.figure(0)  
-plt.plot(snn.history['acc'],'r')  
-plt.plot(snn.history['val_acc'],'g')  
+plt.plot(snn.history['mean_absolute_error'],'r')  
+plt.plot(snn.history['val_mean_absolute_error'],'g')  
 plt.xticks(np.arange(0, 11, 2.0))  
 plt.rcParams['figure.figsize'] = (8, 6)  
 plt.xlabel("Num of Epochs")  
-plt.ylabel("Accuracy")  
-plt.title("Training Accuracy vs Validation Accuracy")  
+plt.ylabel("MSE")  
+plt.title("Training MSE vs Validation MSE")  
 plt.legend(['train','validation'])
 
 plt.figure(1)  
@@ -79,42 +84,8 @@ plt.xticks(np.arange(0, 11, 2.0))
 plt.rcParams['figure.figsize'] = (8, 6)  
 plt.xlabel("Num of Epochs")  
 plt.ylabel("Loss")  
-plt.title("Training Loss vs Validation Loss")  
+plt.title("Training Loss vs Validation Loss (MSE)")  
 plt.legend(['train','validation'])
 
 plt.show()  
-
-
-
-# # fix random seed for reproducibility
-# seed = 7
-# numpy.random.seed(seed)
-# # load pima indians dataset
-# dataset = numpy.loadtxt("pima-indians-diabetes.csv", delimiter=",")
-# # split into input (X) and output (Y) variables
-# X = dataset[:,0:8]
-# Y = dataset[:,8]
-
-# # Compile model
-# model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-# # Fit the model
-# history = model.fit(X, Y, validation_split=0.33, epochs=150, batch_size=10, verbose=0)
-# # list all data in history
-# print(history.history.keys())
-# # summarize history for accuracy
-# plt.plot(history.history['acc'])
-# plt.plot(history.history['val_acc'])
-# plt.title('model accuracy')
-# plt.ylabel('accuracy')
-# plt.xlabel('epoch')
-# plt.legend(['train', 'test'], loc='upper left')
-# plt.show()
-# # summarize history for loss
-# plt.plot(history.history['loss'])
-# plt.plot(history.history['val_loss'])
-# plt.title('model loss')
-# plt.ylabel('loss')
-# plt.xlabel('epoch')
-# plt.legend(['train', 'test'], loc='upper left')
-# plt.show()
 

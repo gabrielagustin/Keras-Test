@@ -146,8 +146,8 @@ def read(file):
     data.Et = normalizado(data.Et)
     data.T_s_modis = normalizado(data.T_s_modis)
 
-    del data['T_s_modis']
-    # del data['T_s']
+    # del data['T_s_modis']
+    del data['T_s']
 
     # print('------------------------------------------------------------------')
     # print(data.describe())
