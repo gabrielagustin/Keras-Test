@@ -92,7 +92,5 @@ plt.ylabel("Soil Moisture [%Vol.]")
 plt.title("Test")  
 plt.legend(['y_test','y_predict'])
 
-
-
 plt.show()  
 
