@@ -18,5 +18,6 @@ def create_simple_nn():
     model.add(Dense(8, input_dim=4, kernel_initializer='uniform', activation='relu'))
     model.add(Dense(8, kernel_initializer='uniform', activation='relu'))
     model.add(Dense(1, kernel_initializer='uniform'))
+    model.compile(optimizer='adam', loss='mean_absolute_error', metrics=['mean_squared_error'])  
     return model
 

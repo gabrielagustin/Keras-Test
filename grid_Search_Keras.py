@@ -14,7 +14,9 @@ import numpy as np
 from sklearn.model_selection import GridSearchCV
 from keras.models import Sequential
 from keras.layers import Dense
-from keras.wrappers.scikit_learn import KerasClassifier
+from keras.wrappers.scikit_learn import KerasRegressor
+
+
 
 
 import nn_Model_Keras
@@ -42,34 +44,31 @@ y_train = np.array(dataTraining["SM_SMAP"])
 del dataTraining["SM_SMAP"]
 X_train = dataTraining
 
-y_test = np.array(dataTest["SM_SMAP"])
-# y_test = 10**(y_test)
-del dataTest["SM_SMAP"]
-X_test = dataTest
-
-
 # fix random seed for reproducibility
 seed = 7
 np.random.seed(seed)
 
 # create model
-snn_model = nn_Model_Keras.create_simple_nn()  
-snn_model.compile(optimizer='adam', loss='mean_absolute_error', metrics=['mean_squared_error'])  
+model = KerasRegressor(build_fn=nn_Model_Keras.create_simple_nn, verbose=0)
+# snn_model = nn_Model_Keras.create_simple_nn()  
 # define the grid search parameters
-batch_size = [10, 20, 40, 60, 80, 100]
-epochs = [10, 50, 100]
-param_grid = dict(batch_size=batch_size, epochs=epochs)
+batch_size = [5, 10] # , 40, 60, 80, 100
+epochs = [5, 10] # , 100
+param_grid = dict(batch_size=batch_size,
+                     epochs=epochs)
 # grid search
-grid = GridSearchCV(estimator=snn_model, param_grid=param_grid)
+Scoring='neg_mean_squared_error' 
+grid = GridSearchCV(estimator=model, param_grid=param_grid, scoring=Scoring, n_jobs=-1, return_train_score=True)
+
 grid_result = grid.fit(X_train, y_train)
 
-# # summarize results
-# print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
-# means = grid_result.cv_results_['mean_test_score']
-# stds = grid_result.cv_results_['std_test_score']
-# params = grid_result.cv_results_['params']
-# for mean, stdev, param in zip(means, stds, params):
-#     print("%f (%f) with: %r" % (mean, stdev, param))
+# summarize results
+print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
+means = grid_result.cv_results_['mean_test_score']
+stds = grid_result.cv_results_['std_test_score']
+params = grid_result.cv_results_['params']
+for mean, stdev, param in zip(means, stds, params):
+    print("%f (%f) with: %r" % (mean, stdev, param))
 
 
 
