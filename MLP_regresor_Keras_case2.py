@@ -65,7 +65,7 @@ np.random.seed(seed)
 snn_model = create_simple_nn()  
 snn_model.compile(optimizer='adam', loss='mean_absolute_error', metrics=['mean_squared_error'])  
 
-snn = snn_model.fit(x=X_train, y=y_train, batch_size=32, epochs=15, verbose=1, validation_split=0.25, shuffle=True)  
+snn = snn_model.fit(x=X_train, y=y_train, batch_size=4, epochs=30, verbose=1, validation_split=0.25, shuffle=True)  
 ###validation_data=(X_test, y_test),
 
 
@@ -73,7 +73,7 @@ plt.figure(0)
 plt.plot(snn.history['loss'],'r')  
 plt.plot(snn.history['val_loss'],'g')  
 plt.xticks(np.arange(0, 11, 2.0))  
-plt.rcParams['figure.figsize'] = (8, 6)  
+plt.rcParams['figure.figsize'] = (8, 6) 
 plt.xlabel("Num of Epochs")  
 plt.ylabel("Loss")  
 plt.title("Training Loss vs Validation Loss (MSE)")  
