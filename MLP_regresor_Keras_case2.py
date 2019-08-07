@@ -6,28 +6,13 @@ Created on Mon Jul 22 16:16:04 2019
 @author: gag
 
 MLP as regressor using Keras. 
-Knowing that KerasRegressor is a Wrappers for the Scikit-Learn API !!!
 """
 
 import lectura
+import nn_Model_Keras
 
 import numpy as np
 import matplotlib.pyplot as plt
-
-from keras.models import Sequential
-from keras.layers import Dense
-import matplotlib.pyplot as plt
-import numpy
-
-
-def create_simple_nn():  
-    # create model, as a regressor
-    # Here you should use something like Scikit-learn to find the best architecture
-    model = Sequential()
-    model.add(Dense(8, input_dim=4, kernel_initializer='uniform', activation='relu'))
-    model.add(Dense(8, kernel_initializer='uniform', activation='relu'))
-    model.add(Dense(1, kernel_initializer='uniform'))
-    return model
 
 
 path = "/home/gag/MyProjects/Keras-Test/"
@@ -62,7 +47,7 @@ X_test = dataTest
 seed = 7
 np.random.seed(seed)
 
-snn_model = create_simple_nn()  
+snn_model = nn_Model_Keras.create_simple_nn()  
 snn_model.compile(optimizer='adam', loss='mean_absolute_error', metrics=['mean_squared_error'])  
 
 snn = snn_model.fit(x=X_train, y=y_train, batch_size=4, epochs=30, verbose=1, validation_split=0.25, shuffle=True)  

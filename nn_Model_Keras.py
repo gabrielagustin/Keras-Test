@@ -9,6 +9,8 @@ Created on Mon Jul 22 16:16:04 2019
 
 """
 
+from keras.models import Sequential
+from keras.layers import Dense
 
 def create_simple_nn():  
     # create model, as a regressor
