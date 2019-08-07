@@ -11,13 +11,8 @@ Use scikit-learn to grid search to find the best parameters
 """
 
 import numpy as np
-from sklearn.model_selection import GridSearchCV
-from keras.models import Sequential
-from keras.layers import Dense
 from keras.wrappers.scikit_learn import KerasRegressor
-
-
-
+from sklearn.model_selection import GridSearchCV
 
 import nn_Model_Keras
 import lectura
@@ -52,13 +47,13 @@ np.random.seed(seed)
 model = KerasRegressor(build_fn=nn_Model_Keras.create_simple_nn, verbose=0)
 # snn_model = nn_Model_Keras.create_simple_nn()  
 # define the grid search parameters
-batch_size = [5, 10] # , 40, 60, 80, 100
+batch_size = [5] # , 40, 60, 80, 100
 epochs = [5, 10] # , 100
 param_grid = dict(batch_size=batch_size,
                      epochs=epochs)
 # grid search
-Scoring='neg_mean_squared_error' 
-grid = GridSearchCV(estimator=model, param_grid=param_grid, scoring=Scoring, n_jobs=-1, return_train_score=True)
+grid = GridSearchCV(estimator=model, param_grid=param_grid, n_jobs=-1)
+
 
 grid_result = grid.fit(X_train, y_train)
 
