@@ -62,6 +62,9 @@ for mean, stdev, param in zip(means, stds, params):
 
 
 """
+Using: 
+        batch_size=80, epochs=10
+
 Best: -6.827617 using {'optimizer': 'Adam'}
 -7.211086 (0.631136) with: {'optimizer': 'SGD'}
 -7.002374 (1.016755) with: {'optimizer': 'RMSprop'}
