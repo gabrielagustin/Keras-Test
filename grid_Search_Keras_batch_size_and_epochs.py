@@ -66,6 +66,7 @@ for mean, stdev, param in zip(means, stds, params):
 
 
 """
+OJO!!! Usando optimizer='adam'
 Best: -6.729004 using {'batch_size': 80, 'epochs': 10}
 -7.307594 (0.883138) with: {'batch_size': 10, 'epochs': 10}
 -7.760955 (0.626575) with: {'batch_size': 10, 'epochs': 50}

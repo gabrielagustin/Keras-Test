@@ -44,7 +44,7 @@ seed = 7
 np.random.seed(seed)
 
 # create model
-model = KerasRegressor(build_fn=nn_Model_Keras.create_simple_nn, batch_size=100, epochs=10, verbose=0)
+model = KerasRegressor(build_fn=nn_Model_Keras.create_simple_nn, batch_size=80, epochs=10, verbose=0)
 # define the grid search parameters
 optimizer = ['SGD', 'RMSprop', 'Adagrad', 'Adadelta', 'Adam', 'Adamax', 'Nadam']
 param_grid = dict(optimizer=optimizer)
@@ -61,9 +61,15 @@ for mean, stdev, param in zip(means, stds, params):
     print("%f (%f) with: %r" % (mean, stdev, param))
 
 
-
 """
-
+Best: -6.827617 using {'optimizer': 'Adam'}
+-7.211086 (0.631136) with: {'optimizer': 'SGD'}
+-7.002374 (1.016755) with: {'optimizer': 'RMSprop'}
+-8.298661 (1.424133) with: {'optimizer': 'Adagrad'}
+nan (nan) with: {'optimizer': 'Adadelta'}
+-6.827617 (1.192136) with: {'optimizer': 'Adam'}
+-7.150356 (1.164060) with: {'optimizer': 'Adamax'}
+-7.261933 (0.852300) with: {'optimizer': 'Nadam'}
 """
 
 
