@@ -53,8 +53,6 @@ param_grid = dict(batch_size=batch_size,
                      epochs=epochs)
 # grid search
 grid = GridSearchCV(estimator=model, param_grid=param_grid, n_jobs=-1)
-
-
 grid_result = grid.fit(X_train, y_train)
 
 # summarize results
