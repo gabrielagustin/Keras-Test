@@ -6,7 +6,7 @@ Created on Mon Jul 22 16:16:04 2019
 @author: gag
 
 Use scikit-learn to grid search to find the best parameters
-    - Optimization Algorithm
+    - activation functions
 
 """
 
